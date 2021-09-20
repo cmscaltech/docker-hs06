@@ -23,13 +23,22 @@ ls -l /cvmfs/cms.cern.ch
 ```
 
 2. /wntmp - Is a separate disk for scratch space.
-3. Copy Spec tarball from HePIX and the SPEC Suite which you ordered from spec.org.
+3. Generate SPEC HS06 Tarball for spec suite ISO File:
 ```
-mkdir /wntmp/hs06/
-cd /wntmp/hs06
-cp /storage/other/spec-tarball.tar.bz2 .
-tar -xvf spec-tarball.tar.bz2
-cd spec2k/
-tar -xvf SPEC2006_v12.tar.bz2
+mkdir /mnt/SPEC2006_v12
+mount -o ro /root/<ISO_DOWNLOADED_FROM_SPEC_WEBSITE> /mnt/SPEC2006_v12
+cd /mnt/
+chmod -R u+w SPEC2006_v12
+tar cvjf /SPEC2006_v12.tar.bz2 SPEC2006_v12
+cd 
+umount /mnt/SPEC2006_v12 ; rmdir /mnt/SPEC2006_v12
+
 ```
-4. build docker image and run it.
+4. Generate SPEC CPU2017 Tarball from spec suite ISO file
+```
+TODO
+```
+5. Build and run docker container
+```
+TODO
+```
