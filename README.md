@@ -21,22 +21,26 @@ export CMS_LOCAL_SITE=/cvmfs/cms.cern.ch/SITECONF/T2_US_Caltech
 ####################
 ls -l /cvmfs/cms.cern.ch
 ```
-
 2. /wntmp - Is a separate disk for scratch space.
-3. Generate SPEC HS06 Tarball for spec suite ISO File:
+3. Generate SPEC HS06 Tarball for spec suite ISO File. (You need to has HS06 ISO File)
 ```
-mkdir /mnt/SPEC2006_v12
-mount -o ro /root/<ISO_DOWNLOADED_FROM_SPEC_WEBSITE> /mnt/SPEC2006_v12
-cd /mnt/
-chmod -R u+w SPEC2006_v12
+mkdir /tmp/SPEC2006_v12
+mount -o ro /root/<ISO_DOWNLOADED_FROM_SPEC_WEBSITE> /tmp/SPEC2006_v12
+cd /tmp
 tar cvjf /SPEC2006_v12.tar.bz2 SPEC2006_v12
 cd 
-umount /mnt/SPEC2006_v12 ; rmdir /mnt/SPEC2006_v12
-
+umount /tmp/SPEC2006_v12 ; rmdir /tmp/SPEC2006_v12
+# Save /SPEC2006_v12.tar.bz2 which can be reused on diff machine. (like on a shared FS or USB, etc)
 ```
-4. Generate SPEC CPU2017 Tarball from spec suite ISO file
+4. Generate SPEC CPU2017 Tarball from spec suite ISO file. (You need to has CPU2017 ISO File)
 ```
-TODO
+mkdir /tmp/CPU2017
+mount -o ro /root/<ISO_DOWNLOADED_FROM_SPEC_WEBSITE> /tmp/CPU2017
+cd /tmp
+tar cvjf /CPU2017.tar.bz2 CPU2017
+cd 
+umount /tmp/CPU2017 ; rmdir /tmp/CPU2017
+# Save /CPU2017.tar.bz2 which can be reused on diff machine. (like on a shared FS or USB, etc)
 ```
 5. Build and run docker container
 ```
