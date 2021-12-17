@@ -2,7 +2,7 @@ FROM centos:7
 
 MAINTAINER Justas Balcas <jbalcas@caltech.edu>
 
-RUN mkdir /opt
+RUN mkdir -p /opt
 ADD base-runtime-float.patch /opt/base-runtime-float.patch 
 
 RUN yum -y install yum-plugin-priorities

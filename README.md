@@ -70,5 +70,5 @@ TODOs:
 1. Allow to control /wntmp directory for docker
 2. Allow to control which tests to run (e.g. only HS06_32, or only CPU2017)
 3. Add HEPScore start/run script into this repo.
-
+4. Upload to docker hub, so no need to rebuild (easier for future to use with condor)
 
