@@ -1,0 +1,93 @@
+diff --git a/lib/spec2017/runspec2017.sh b/lib/spec2017/runspec2017.sh
+index a0ec20c..608151d 100644
+--- a/lib/spec2017/runspec2017.sh
++++ b/lib/spec2017/runspec2017.sh
+@@ -59,7 +59,7 @@ function compute_spec2017_results() {
+ 	# Within that section, look for lines that look like:
+ 	#   410.bwaves      13590       2690       5.05 *
+ 	# and grab the last number, 5.05
+-	for b in `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`;
++	for b in `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`;
+ 	do
+             partial="$partial + l($b)"
+             count=$(($count + 1))
+@@ -71,7 +71,7 @@ function compute_spec2017_results() {
+             # or, in order to process this with bc: exp( ( ln(x) + ln(y) + ln(z) ) / 3 )
+             SUM="$SUM + `echo "scale=8; e(($partial) / $count)" | bc -l`"
+ 
+-	    LISTBMKS="$LISTBMKS `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/\([0-9]\{3\}\.\w\+\)\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`"
++	    LISTBMKS="$LISTBMKS `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/\([0-9]\{3\}\.\w\+\)\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`"
+ 
+ 	    [[ $count -lt $mincount ]] && mincount=$count
+ 	    [[ $count -gt $maxcount ]] && maxcount=$count
+@@ -102,7 +102,7 @@ function compute_spec2017_results() {
+     for bmk in `echo $LISTBMKS | tr " " "\n" | sort | uniq`;
+     do
+ 	reslist=""
+-	for res in `sed -n -e "/^=\+$/,/^ Est. SPEC/!d; s/$bmk\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p" $SPECDIR/result/*.[0-9]*.*txt 2>/dev/null`;
++	for res in `sed -n -e "/^=\+$/,/^ Est. SPEC/!d; s/$bmk\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p" $SPECDIR/result/*.[0-9]*.*txt 2>/dev/null`;
+ 	do
+ 	    reslist="$reslist $res," 
+ 	done
+diff --git a/lib/spec2k6/runhs06.sh b/lib/spec2k6/runhs06.sh
+index f06ccbf..3c5c7e2 100755
+--- a/lib/spec2k6/runhs06.sh
++++ b/lib/spec2k6/runhs06.sh
+@@ -70,7 +70,7 @@ function calculate_results() {
+ 	# Within that section, look for lines that look like:
+ 	#   410.bwaves      13590       2690       5.05 *
+ 	# and grab the last number, 5.05
+-	for b in `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`;
++	for b in `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`;
+ 	do
+             partial="$partial + l($b)"
+             count=$(($count + 1))
+@@ -82,7 +82,7 @@ function calculate_results() {
+             # or, in order to process this with bc: exp( ( ln(x) + ln(y) + ln(z) ) / 3 )
+             SUM="$SUM + `echo "scale=8; e(($partial) / $count)" | bc -l`"
+ 
+-	    LISTBMKS="$LISTBMKS `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/\([0-9]\{3\}\.\w\+\)\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`"
++	    LISTBMKS="$LISTBMKS `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/\([0-9]\{3\}\.\w\+\)\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $SPECDIR/result/*.$n.*txt 2>/dev/null`"
+ 
+ 	    [[ $count -lt $mincount ]] && mincount=$count
+ 	    [[ $count -gt $maxcount ]] && maxcount=$count
+@@ -103,7 +103,7 @@ function calculate_results() {
+     for bmk in `echo $LISTBMKS | tr " " "\n" | sort | uniq`;
+     do
+ 	reslist=""
+-	for res in `sed -n -e "/^=\+$/,/^ Est. SPEC/!d; s/$bmk\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p" $SPECDIR/result/*.[0-9]*.*txt 2>/dev/null`;
++	for res in `sed -n -e "/^=\+$/,/^ Est. SPEC/!d; s/$bmk\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p" $SPECDIR/result/*.[0-9]*.*txt 2>/dev/null`;
+ 	do
+ 	    reslist="$reslist $res," 
+ 	done
+@@ -126,7 +126,7 @@ function summary_report() {
+     echo "Result:" $SUM >> $NAME/system.txt
+     for n in $RUNS;
+     do
+-	echo "Values RUN $n " `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $NAME/*.$n.*txt 2>/dev/null` >> $NAME/system.txt
++	echo "Values RUN $n " `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $NAME/*.$n.*txt 2>/dev/null` >> $NAME/system.txt
+ 	
+     done
+ 
+diff --git a/lib/spec2k6/runspec.sh b/lib/spec2k6/runspec.sh
+index c7f65ca..c6b2087 100644
+--- a/lib/spec2k6/runspec.sh
++++ b/lib/spec2k6/runspec.sh
+@@ -163,7 +163,7 @@ do
+     # Within that section, look for lines that look like:
+     #   410.bwaves      13590       2690       5.05 *
+     # and grab the last number, 5.05
+-    for b in `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' result/*.$n.*txt 2>/dev/null`;
++    for b in `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' result/*.$n.*txt 2>/dev/null`;
+     do
+         partial="$partial + l($b)"
+         count=$(($count + 1))
+@@ -199,7 +199,7 @@ echo "Description:" $DESCRIPTION >> $NAME/system.txt
+ echo "Result:" $SUM >> $NAME/system.txt
+ for n in $RUNS;
+ do
+-    echo "Values RUN $n " `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $NAME/*.$n.*txt 2>/dev/null` >> $NAME/system.txt
++    echo "Values RUN $n " `sed -n -e '/^=\+$/,/^ Est. SPEC/!d; s/[0-9]\{3\}\.\w\+\s\+[0-9]\+\s\+[0-9.]\+\s\+\([0-9.]\+\)\s\+\*/\1/p' $NAME/*.$n.*txt 2>/dev/null` >> $NAME/system.txt
+   
+ done
+ echo "Start time:" $START >> $NAME/system.txt
