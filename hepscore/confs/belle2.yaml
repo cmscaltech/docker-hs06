@@ -1,0 +1,20 @@
+hepscore_benchmark:
+  benchmarks:
+    belle2-gen-sim-reco-bmk:
+      results_file: belle2-gen-sim-reco_summary.json
+      ref_scores:
+        gen-sim-reco: 5.44
+      weight: 1.0
+      version: v2.2
+      args:
+        threads: 1
+        events: 50
+  settings:
+    name: HEPscore20POC
+    reference_machine: "CPU Intel(R) Xeon(R) CPU E5-2630 v3 @ 2.40GHz"
+    registry: docker://gitlab-registry.cern.ch/hep-benchmarks/hep-workloads
+    method: geometric_mean
+    repetitions: 3
+    retries: 1
+    scaling: 355
+    container_exec: singularity
