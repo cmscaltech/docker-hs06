@@ -1,8 +1,10 @@
 #!/bin/bash
 
-if [ -f ../environment ]; then
+SDIR="$(dirname "$(realpath "$0")")"
+
+if [ -f $SDIR/../environment ]; then
     # Load Environment Variables
-    export $(cat ../environment | grep -v '#' | awk '/=/ {print $1}')
+    export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
 timestamp=$(date +%s)

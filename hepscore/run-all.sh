@@ -1,10 +1,11 @@
 #!/bin/bash
 
-if [ -f ../environment ]; then
-    # Load Environment Variables
-    export $(cat ../environment | grep -v '#' | awk '/=/ {print $1}')
-fi
+SDIR="$(dirname "$(realpath "$0")")"
 
+if [ -f $SDIR/../environment ]; then
+    # Load Environment Variables
+    export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
+fi
 
 timestamp=$(date +%s)
 OUT_DIR=$SAVE_DIR/HEPSCORE/$timestamp

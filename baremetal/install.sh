@@ -1,8 +1,10 @@
 #!/bin/bash
 
-if [ -f ../environment ]; then
+SDIR="$(dirname "$(realpath "$0")")"
+
+if [ -f $SDIR/../environment ]; then
     # Load Environment Variables
-    export $(cat ../environment | grep -v '#' | awk '/=/ {print $1}')
+    export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
 
@@ -17,16 +19,22 @@ then
 fi
 
 
-cd /opt && git clone https://gitlab.cern.ch/cloud-infrastructure/cloud-benchmark-suite.git
-cd /opt && mv cloud-benchmark-suite cern-benchmark
-cd /opt/cern-benchmark/ && git apply ../base-runtime-float.patch
+if [ ! -d "/opt/cern-benchmark" ]; then
+    cd /opt && git clone https://gitlab.cern.ch/cloud-infrastructure/cloud-benchmark-suite.git
+    cd /opt && mv cloud-benchmark-suite cern-benchmark
+    cd /opt/cern-benchmark/ && git apply $SDIR/../base-runtime-float.patch
+fi
 
 cd $WN_TMP
-if [ -z "$SPEC2006_v12_TAR" ]; then
-    tar -xvzf $SPEC2006_v12_TAR
+if [ -n "$SPEC2006_v12_TAR" ]; then
+    if [ ! -d "$WN_TMP/SPEC2006_v12" ]; then
+        tar -xvf $SPEC2006_v12_TAR
+    fi
 fi
 
 
-if [ -z "$CPU2017_TAR" ]; then
-    tar -xvf $CPU2017_TAR
+if [ -n "$CPU2017_TAR" ]; then
+    if [ ! -d "$WN_TMP/CPU2017" ]; then
+        tar -xvf $CPU2017_TAR
+    fi
 fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f ../environment ]; then
+if [ -f /environment ]; then
     # Load Environment Variables
     export $(cat /environment | grep -v '#' | awk '/=/ {print $1}')
 fi
