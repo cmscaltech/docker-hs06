@@ -7,7 +7,13 @@ if [ -f $SDIR/../environment ]; then
     export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
-yum -y install docker-ce
+
+if grep -q -i "release 8" /etc/redhat-release
+then
+    yum -y install docker
+else
+    yum -y install docker-ce
+fi
 
 if [ $DOCKER_OVERWRITE_STORAGE -eq 1 ]; then
     service docker stop
