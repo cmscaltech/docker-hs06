@@ -13,17 +13,18 @@ fi
 
 yum -y install git bzip2 bc
 
-# Dev tools group install. Previously was enough groupinstall 'Dev...', but seems newest CentOS7, require convert? To be confirmed
-yum group mark-install "Development Tools"
-yum group mark-convert "Development Tools"
-yum -y groupinstall 'Development Tools'
-
 yum -y install glibc-devel.i686 glibc-devel systemd-libs.x86_64 libgcc libgcc.i686 libstdc++.i686 libstdc++
 
 if grep -q -i "release 8" /etc/redhat-release
 then
     # libnsl and glibc-devel are needed for running HS06_32
     yum -y install libnsl glibc-devel.i686
+    yum -y group mark install "Development Tools"
+    yum -y groupinstall 'Development Tools'
+else
+    yum group mark-install "Development Tools"
+    yum group mark-convert "Development Tools"
+    yum -y groupinstall 'Development Tools'
 fi
 
 
