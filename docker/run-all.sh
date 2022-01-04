@@ -12,6 +12,6 @@ docker run \
        --name benchmarks-docker \
        -v $WN_TMP:$WN_TMP \
        -v /cvmfs/:/cvmfs \
-       -v $(pwd)/../environment:/environment \
+       -v $SDIR/../environment:/environment \
        --env-file $SDIR/../environment \
        benchmarks-docker
