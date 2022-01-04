@@ -14,8 +14,8 @@ if [ $DOCKER_OVERWRITE_STORAGE -eq 1 ]; then
     # This part below is fragile if people have things already under /var/lib/docker
     # Mention this in README.MD to do in advance.
     rm -rf /var/lib/docker
-    mkdir $DOCkER_STORAGE_DIR
-    ln -s $DOCkER_STORAGE_DIR /var/lib/docker
+    mkdir $DOCKER_STORAGE_DIR
+    ln -s $DOCKER_STORAGE_DIR /var/lib/docker
     service docker start
 fi
 

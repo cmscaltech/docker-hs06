@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 SDIR="$(dirname "$(realpath "$0")")"
 
 if [ -f $SDIR/../environment ]; then
@@ -13,5 +13,5 @@ docker run \
        -v $WN_TMP:$WN_TMP \
        -v /cvmfs/:/cvmfs \
        -v $(pwd)/../environment:/environment \
-       --env-file ../environment \
+       --env-file $SDIR/../environment \
        benchmarks-docker
