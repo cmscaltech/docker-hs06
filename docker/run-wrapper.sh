@@ -5,8 +5,13 @@ if [ -f /environment ]; then
     export $(cat /environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
+# Source Helper functions
+source $SDIR/../helper_functions.sh
+
+HT_FLAG=$(identify_ht)
+
 timestamp=$(date +%s)
-OUT_DIR=$SAVE_DIR/DOCKER/$timestamp
+OUT_DIR=$SAVE_DIR/DOCKER-HT-$HT_FLAG/$timestamp
 mkdir -p $OUT_DIR
 # =========================================================
 #                        HS_06_32

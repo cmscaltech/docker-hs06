@@ -7,8 +7,13 @@ if [ -f $SDIR/../environment ]; then
     export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
+# Source Helper functions
+source $SDIR/../helper_functions.sh
+
+HT_FLAG=$(identify_ht)
+
 timestamp=$(date +%s)
-OUT_DIR=$SAVE_DIR/HEPSCORE/$timestamp
+OUT_DIR=$SAVE_DIR/HEPSCORE-HT-$HT_FLAG/$timestamp
 mkdir -p $OUT_DIR
 
 HEPSCORE_LOGS=$OUT_DIR/LOGS/

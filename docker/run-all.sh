@@ -7,6 +7,12 @@ if [ -f $SDIR/../environment ]; then
     export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
+if [ $DOCKER_APPLY_SYSCTL -eq 1 ]; then
+    sysctl -w user.max_net_namespaces=10000
+fi
+
+# Remove all any unleft docker container
+docker rm benchmarks-docker
 
 docker run \
        --name benchmarks-docker \

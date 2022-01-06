@@ -1,14 +1,18 @@
 #!/bin/bash
 
 SDIR="$(dirname "$(realpath "$0")")"
+# Source Helper functions
+source $SDIR/../helper_functions.sh
 
 if [ -f $SDIR/../environment ]; then
     # Load Environment Variables
     export $(cat $SDIR/../environment | grep -v '#' | awk '/=/ {print $1}')
 fi
 
+HT_FLAG=$(identify_ht)
+
 timestamp=$(date +%s)
-OUT_DIR=$SAVE_DIR/BAREMETAL/$timestamp
+OUT_DIR=$SAVE_DIR/BAREMETAL-HT-$HT_FLAG/$timestamp
 mkdir -p $OUT_DIR
 # =========================================================
 #                        HS_06_32
